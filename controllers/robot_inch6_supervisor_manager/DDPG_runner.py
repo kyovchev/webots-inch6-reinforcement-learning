@@ -98,4 +98,10 @@ def run(load_path):
             env.episode_score = 0
             state = env.reset()
             step = 0
+            # Move the TARGET to a random position
             env.target = env.getFromDef("TARGET")
+            translation_field = env.target.getField('translation')
+            pos = [random.randint(9, 15, 1)[0] / 100,
+                random.randint(-9, 9, 1)[0] / 100,
+                0.7]
+            translation_field.setSFVec3f(pos)
