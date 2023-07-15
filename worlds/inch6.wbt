@@ -1,0 +1,55 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2022b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2022b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2022b/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2022b/projects/objects/tables/protos/Desk.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2022b/projects/appearances/protos/Parquetry.proto"
+EXTERNPROTO "../protos/RobotInch6.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.2839661083780239 0.2811425252887044 0.9166908583415297 1.667632892621146
+  position 0.09456155807618868 -1.318626232909877 1.633056439052145
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  translation 0 0 -0.07
+  floorSize 10 10
+  floorAppearance Parquetry {
+    type "light strip"
+  }
+  wallHeight 0.05
+}
+DEF TARGET Solid {
+  translation 0.16 0 0.7
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.666667 0 0
+        metalness 0
+      }
+      geometry Sphere {
+        radius 0.01
+      }
+      castShadows FALSE
+    }
+  ]
+}
+Desk {
+  translation 0 0 -0.07
+  rotation 0 0 1 1.5708
+}
+RobotInch6 {
+  translation -0.19 0 0.64
+  controller "robot_inch6_supervisor_manager"
+  supervisor TRUE
+  toolSlot [
+    DEF END_EFFECTOR Solid {
+    }
+  ]
+}

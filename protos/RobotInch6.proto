@@ -1,0 +1,339 @@
+#VRML_SIM R2022b utf8
+# license: Apache License 2.0
+# license url: http://www.apache.org/licenses/LICENSE-2.0
+# This is a proto file for Webots for the RobotInch6
+
+PROTO RobotInch6 [
+  field  SFVec3f     translation     0 0 0
+  field  SFRotation  rotation        0 0 1 0
+  field  SFString    name            "RobotInch"  # Is `Robot.name`.
+  field  SFString    controller      "void"                # Is `Robot.controller`.
+  field  MFString    controllerArgs  []                    # Is `Robot.controllerArgs`.
+  field  SFString    customData      ""                    # Is `Robot.customData`.
+  field  SFBool      supervisor      FALSE                 # Is `Robot.supervisor`.
+  field  SFBool      synchronization TRUE                  # Is `Robot.synchronization`.
+  field  SFBool      selfCollision   FALSE                 # Is `Robot.selfCollision`.
+  field  MFNode      toolSlot        []                    # Extend the robot with new nodes at the end of the arm.
+  field  MFNode      worldSlot        []                    # Extend the robot with new nodes into the environment.
+]
+{
+  Robot {
+    translation IS translation
+    rotation IS rotation
+    controller IS controller
+    controllerArgs IS controllerArgs
+    customData IS customData
+    supervisor IS supervisor
+    synchronization IS synchronization
+    selfCollision IS selfCollision
+    children [
+      Transform {
+        translation 0 0 0
+        children IS worldSlot
+      }
+      Shape {
+        appearance PBRAppearance {
+          baseColor 0.937255 0.160784 0.160784
+          transparency 0.000000
+          roughness 1.000000
+          metalness 0
+          emissiveColor 0.000000 0.000000 0.000000
+        }
+        geometry Box {
+           size 0.001 0.001 0.001
+        }
+      }
+      Solid {
+        translation 0.000000 0.000000 0.000000
+        rotation 0.000000 0.000000 1.000000 0.000000
+        children [
+          Shape {
+            appearance DEF arm_base_link_material PBRAppearance {
+              baseColor 0.937255 0.160784 0.160784
+              transparency 0.000000
+              roughness 1.000000
+              metalness 0
+              emissiveColor 0.000000 0.000000 0.000000
+            }
+            geometry DEF base Mesh {
+              url "./meshes/base.stl"
+            }
+            castShadows FALSE
+          }
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0.000000 0.000000 1.000000
+              anchor 0.000000 0.000000 0.000000
+              dampingConstant 0.0
+              staticFriction 0.0
+            }
+            device [
+              RotationalMotor {
+                name "arm_1_joint"
+                maxVelocity 12
+                minPosition -1.5709
+                maxPosition 1.5709
+                maxTorque 1.5
+              }
+              PositionSensor {
+                name "arm_1_joint_sensor"
+              }
+            ]
+            endPoint Solid {
+              translation 0.000000 0.000000 0.12500
+              rotation 0.000000 0.000000 1.000000 0.000000
+              children [
+                Shape {
+                  appearance DEF arm_1_link_material PBRAppearance {
+                    baseColor  0.255000 0.555000 0.000000
+                    transparency 0.000000
+                    roughness 1.000000
+                    metalness 0
+                    emissiveColor 0.000000 0.000000 0.000000
+                  }
+                  geometry DEF first_link Mesh {
+                    url "./meshes/first_link.stl"
+                  }
+                  castShadows FALSE
+                }
+                HingeJoint {
+                  jointParameters HingeJointParameters {
+                    axis 0.000000 0.000000 1.000000
+                    anchor 0.150000 0.000000 0.000000
+                    dampingConstant 0.0
+                    staticFriction 0.0
+                  }
+                  device [
+                    RotationalMotor {
+                      name "arm_2_joint"
+                      maxVelocity 12
+                      minPosition -1.5709
+                      maxPosition 1.5709
+                      maxTorque 1.5
+                    }
+                    PositionSensor {
+                      name "arm_2_joint_sensor"
+                    }
+                  ]
+                  endPoint Solid {
+                    translation 0.150000 0.000000 0.000000
+                    rotation 0.000000 0.000000 1.000000 0.000000
+                    children [
+                      Transform {
+                        translation 0.000000 0.000000 0.000000
+                        rotation 0.000000 0.000000 1.000000 0.000000
+                        children [
+                          Shape {
+                            appearance DEF arm_2_link_material PBRAppearance {
+                              baseColor  0.255000 0.555000 0.000000
+                              transparency 0.000000
+                              roughness 1.000000
+                              metalness 0
+                              emissiveColor 0.000000 0.000000 0.000000
+                            }
+                            geometry DEF second_link Mesh {
+                              url "./meshes/second_link.stl"
+                            }
+                            castShadows FALSE
+                          }
+                        ]
+                      }
+                      HingeJoint {
+                        jointParameters HingeJointParameters {
+                          axis 0.000000 0.000000 1.000000
+                          anchor 0.100000 0.000000 0.000000
+                          dampingConstant 0.0
+                          staticFriction 0.0
+                        }
+                        device [
+                          RotationalMotor {
+                            name "arm_3_joint"
+                            maxVelocity 12
+                            minPosition -1.5709
+                            maxPosition 1.5709
+                            maxTorque 1.5
+                          }
+                          PositionSensor {
+                            name "arm_3_joint_sensor"
+                          }
+                        ]
+                        endPoint Solid {
+                          translation 0.100000 0.000000 0.0000000
+                          rotation 0.000000 0.000000 1.000000 0.000000
+                          children [
+                            Transform {
+                              translation 0.000000 0.000000 0.000000
+                              rotation 0.000000 0.000000 0.000000 0
+                              children [
+                                Shape {
+                                  appearance DEF arm_3_link_material PBRAppearance {
+                                    baseColor  0.255000 0.555000 0.000000
+                                    transparency 0.000000
+                                    roughness 1.000000
+                                    metalness 0
+                                    emissiveColor 0.000000 0.000000 0.000000
+                                  }
+                                  geometry DEF third_link Mesh {
+                                    url "./meshes/third_link.stl"
+                                  }
+                                  castShadows FALSE
+                                }
+                              ]
+                            }
+                            HingeJoint {
+                              jointParameters HingeJointParameters {
+                                axis 0.000000 0.000000 1.000000
+                                anchor 0.100000 0.000000 0.000000
+                                dampingConstant 0.0
+                                staticFriction 0.0
+                              }
+                              device [
+                                RotationalMotor {
+                                  name "arm_4_joint"
+                                  maxVelocity 12
+                                  minPosition -1.5709
+                                  maxPosition 1.5709
+                                  maxTorque 1.5
+                                }
+                                PositionSensor {
+                                  name "arm_4_joint_sensor"
+                                }
+                              ]
+                              endPoint Solid {
+                                translation 0.100000 0.000000 0.000000
+                                rotation 0.000000 0.000000 1.000000 0.000000
+                                children [
+                                  Transform {
+                                    translation 0.000000 0.000000 0.000000
+                                    rotation 0.000000 0.000000 1.000000 0
+                                    children [
+                                      Shape {
+                                        appearance DEF arm_4_link_material PBRAppearance {
+                                          baseColor  0.255000 0.555000 0.000000
+                                          transparency 0.000000
+                                          roughness 1.000000
+                                          metalness 0
+                                          emissiveColor 0.000000 0.000000 0.000000
+                                        }
+                                        geometry DEF fourth_joint Mesh {
+                                          url "./meshes/fourth_joint.stl"
+                                        }
+                                        castShadows FALSE
+                                      }
+                                      SliderJoint {
+                                        jointParameters JointParameters {
+                                          axis 0 0 -1
+                                        }
+                                        device [
+                                          PositionSensor {
+                                            name "arm_5_joint_sensor"
+                                          }
+                                          LinearMotor {
+                                            name "arm_5_joint"
+                                          }
+                                        ]
+                                        endPoint Solid {
+                                          translation 0.002000 -0.005 -0.065000
+                                          rotation 0.000000 0.000000 1.000000 0
+                                          children [
+                                            Transform {
+                                              translation 0 0 0
+                                              children IS toolSlot
+                                            }
+                                            Shape {
+                                              appearance DEF translational_mechanism_material PBRAppearance {
+                                                baseColor 0.255000 0.555000 0.000000
+                                                transparency 0.000000
+                                                roughness 1.000000
+                                                metalness 0
+                                                emissiveColor 0.000000 0.000000 0.000000
+                                              }
+                                              geometry DEF translational_mechanism Mesh {
+                                                url "./meshes/translational_mechanism.stl"
+                                              }
+                                              castShadows FALSE
+                                            }
+                                          ]
+                                          name "translational_mechanism"
+                                          physics Physics {
+                                            density -1
+                                            mass 0.024870
+                                            centerOfMass [ 0.009188 -0.000000 -0.000035 ]
+                                            inertiaMatrix [
+                                              1.599700e-05 7.391800e-06 1.593100e-05
+                                              1.655100e-16 8.391100e-09 -2.714500e-16
+                                            ]
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  }
+                                  
+                                ]
+                                name "arm_4_link"
+                                physics Physics {
+                                  density -1
+                                  mass 0.060507
+                                  centerOfMass [ 0.042645 0.001749 0.009848 ]
+                                  inertiaMatrix [
+                                    1.786487e-05 2.386739e-05 2.835204e-05
+                                    -3.588887e-06 1.110001e-10 2.172959e-10
+                                  ]
+                                }
+                              }
+                            }
+                          ]
+                          name "arm_3_link"
+                          physics Physics {
+                            density -1
+                            mass 0.138706
+                            centerOfMass [ 0.085189 0.001363 -0.000142 ]
+                            inertiaMatrix [
+                              9.730749e-05 3.673012e-04 2.911906e-04
+                              -8.275760e-07 -2.725990e-06 8.005706e-09
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                    name "arm_2_link"
+                    physics Physics {
+                      density -1
+                      mass 0.293310
+                      centerOfMass [ -0.079312 0.001750 0.007349 ]
+                      inertiaMatrix [
+                        1.060400e-03 1.283800e-03 4.074100e-04
+                        1.133367e-09 1.270901e-09 1.410602e-04
+                      ]
+                    }
+                  }
+                }
+              ]
+              name "arm_1_link"
+              physics Physics {
+                density -1
+                mass 0.069055
+                centerOfMass [ 0.000001 0.000483 0.002635 ]
+                inertiaMatrix [
+                  7.786000e-05 4.174500e-05 1.073000e-04
+                  4.590900e-11 -6.487300e-11 2.824400e-07
+                ]
+              }
+            }
+          }
+        ]
+        name "arm_base_link"
+        physics Physics {
+          density -1
+          mass 0.337420
+          centerOfMass [ -0.000000 0.000000 0.042620 ]
+          inertiaMatrix [
+            1.130300e-03 1.130300e-03 1.674700e-03
+            2.339800e-15 5.384400e-11 -2.735000e-11
+          ]
+        }
+      }
+    ]
+    name IS name
+  }
+}
