@@ -46,7 +46,7 @@ Desk {
 }
 RobotInch6 {
   translation -0.19 0 0.64
-  controller "robot_inch6_supervisor_manager"
+  controller "robot_inch6_DDPG_supervisor_manager"
   supervisor TRUE
   toolSlot [
     DEF END_EFFECTOR Solid {
