@@ -53,7 +53,6 @@ class RobotInch6Supervisor(RobotSupervisorEnv):
         self.position_sensors = []
         for i in range(3):
             name = 'arm_' + str(i + 1) + '_joint_sensor'
-            print(name)
             position_sensor = self.getDevice(name)
             position_sensor.enable(self.timestep)
             self.position_sensors.append(position_sensor)
