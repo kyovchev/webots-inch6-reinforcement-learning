@@ -3,7 +3,7 @@ from numpy import convolve, ones, mean, random
 from robot_inch6_supervisor_ddpg import RobotInch6Supervisor
 from agent.ddpg import DDPGAgent
 
-from robot_inch6_supervisor_manager import EPISODE_LIMIT, STEPS_PER_EPISODE, SAVE_MODELS_PERIOD
+from robot_inch6_DDPG_supervisor_manager import EPISODE_LIMIT, STEPS_PER_EPISODE, SAVE_MODELS_PERIOD
 
 def run(load_path):
     # Initialize supervisor object
@@ -28,8 +28,6 @@ def run(load_path):
     while not solved and episode_count < EPISODE_LIMIT:
         state = env.reset()  # Reset robot and get starting observation
         env.episode_score = 0
-
-        print("-> episode_count:", episode_count)
         
         # Move the TARGET to a random position
         env.target = env.getFromDef("TARGET")
@@ -48,7 +46,7 @@ def run(load_path):
             # and whether we reached the done condition
             new_state, reward, done, _ = env.step(act * 0.050)
             # process of negotiation
-            while(new_state==["WAIT"]):
+            while new_state == ["WAIT"]:
                 new_state, reward, done, _ = env.step([-1])
             
             # Save the current state transition in agent's memory
@@ -88,7 +86,7 @@ def run(load_path):
         act = agent.choose_action_test(state)
         state, reward, done, _ = env.step(act * 0.05)
         # process of negotiation
-        while(state==["WAIT"]):
+        while state == ["WAIT"]:
             state, reward, done, _ = env.step([-1])
         
         env.episode_score += reward  # Accumulate episode reward
