@@ -2,6 +2,7 @@
 Webots.lnk
 exports/
 tmp/
+worlds/.*.wbproj
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
